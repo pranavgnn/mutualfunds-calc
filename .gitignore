@@ -3,3 +3,5 @@ src.test
 jshell.history
 nbactions.xml
 nb-configuration.xml
+dist.exec-conv.xml
+dist.launch4j.log
