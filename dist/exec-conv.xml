@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch4jConfig>
+  <dontWrapJar>false</dontWrapJar>
+  <headerType>gui</headerType>
+  <jar>C:\Users\hp\Documents\NetBeansProjects\mutualfunds-calc\target\mutualfunds-calc-1.0-SNAPSHOT-jar-with-dependencies.jar</jar>
+  <outfile>C:\Users\hp\Documents\NetBeansProjects\mutualfunds-calc\mutualfunds-calc.exe</outfile>
+  <errTitle></errTitle>
+  <cmdLine></cmdLine>
+  <chdir>.</chdir>
+  <priority>normal</priority>
+  <downloadUrl></downloadUrl>
+  <supportUrl></supportUrl>
+  <stayAlive>false</stayAlive>
+  <restartOnCrash>false</restartOnCrash>
+  <manifest></manifest>
+  <icon></icon>
+  <classPath>
+    <mainClass>Main</mainClass>
+    <cp>Main</cp>
+  </classPath>
+  <jre>
+    <path>C:\Program Files\Java\jdk-21\bin</path>
+    <requiresJdk>false</requiresJdk>
+    <requires64Bit>false</requires64Bit>
+    <minVersion>1.8.0</minVersion>
+    <maxVersion></maxVersion>
+  </jre>
+</launch4jConfig>
