@@ -135,7 +135,13 @@ class AutofillFieldUI extends MetalTextFieldUI {
     private void shiftAutofill(int direction) {
         if (autofillResults == null) return;
         
-        currentAutofillIndex = (currentAutofillIndex + direction) % autofillResults.size();
+        int resultsSize = autofillResults.size();
+        if (resultsSize < 2) return;
+        
+        currentAutofillIndex = (currentAutofillIndex + direction) % resultsSize;
+        if (currentAutofillIndex < 0)
+            currentAutofillIndex = resultsSize + currentAutofillIndex;
+
         autofill(autofillResults.get(currentAutofillIndex), textField.getSelectionStart());
     }
     

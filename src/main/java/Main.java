@@ -6,13 +6,13 @@ import components.piechart.PieData;
 import java.util.HashMap;
 import javax.swing.ImageIcon;
 
-public class Main extends javax.swing.JFrame {
+public class Main extends javax.swing.JFrame implements Fonts, Colors {
 
     private final HashMap<String, Integer> schemesHash = new HashMap<>();
     
     public Main() {
         initComponents();
-        getContentPane().setBackground(parametersContainer.getBackground());
+        getContentPane().setBackground(mainBackground);
         
         API.getAllSchemes().forEach((JsonNode scheme) -> {
             int schemeCode = scheme.get("schemeCode").asInt();
@@ -45,25 +45,25 @@ public class Main extends javax.swing.JFrame {
         changeReturnsDisplayColor(r >= 0);
         
         graph.clearData();
-        graph.addData(new PieData(totalInvested, new java.awt.Color(24, 26, 42)));
-        graph.addData(new PieData(Math.max(0, totalReturns), new java.awt.Color(152, 164, 255)));
+        graph.addData(new PieData(totalInvested, graphSecondary));
+        graph.addData(new PieData(Math.max(0, totalReturns), graphPrimary));
 
     }
     
     private void changeReturnsDisplayColor(boolean state) {
         if (state)
-            returnsDisplay.setForeground(new java.awt.Color(10, 187, 146));
+            returnsDisplay.setForeground(greenForeground);
         else
-            returnsDisplay.setForeground(new java.awt.Color(213, 84, 56));
+            returnsDisplay.setForeground(redForeground);
     }
     
     private void changeInputBoxColor(javax.swing.JComponent label, boolean state) {
         if (state) {
-            label.setBackground(new java.awt.Color(16, 54, 45));
-            label.setForeground(new java.awt.Color(10, 187, 146));
+            label.setBackground(greenBackground);
+            label.setForeground(greenForeground);
         } else {
-            label.setBackground(new java.awt.Color(65, 29, 22));
-            label.setForeground(new java.awt.Color(213, 84, 56));
+            label.setBackground(redBackground);
+            label.setForeground(redForeground);
         }
     }
     
@@ -135,26 +135,26 @@ public class Main extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Mutual Funds Calculator");
-        setBackground(new java.awt.Color(18, 18, 18));
+        setBackground(mainBackground);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setIconImage((new ImageIcon("../../../Icon.ico").getImage()));
         setLocation(new java.awt.Point(0, 0));
         setLocationByPlatform(true);
         setResizable(false);
 
-        parametersContainer.setBackground(new java.awt.Color(18, 18, 18));
-        parametersContainer.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(37, 37, 37), 2, true));
+        parametersContainer.setBackground(mainBackground);
+        parametersContainer.setBorder(new javax.swing.border.LineBorder(secondaryBorder, 2, true));
 
-        amountContainer.setBackground(new java.awt.Color(28, 28, 28));
-        amountContainer.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(25, 25, 25), 3, true));
+        amountContainer.setBackground(secondaryBackground);
+        amountContainer.setBorder(new javax.swing.border.LineBorder(primaryBorder, 3, true));
 
-        jLabel2.setFont(new java.awt.Font("Noto Sans SemiBold", 0, 18)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(248, 248, 248));
+        jLabel2.setFont(semiBold18);
+        jLabel2.setForeground(primaryForeground);
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel2.setText("₹");
 
-        amountSlider.setBackground(new java.awt.Color(46, 46, 46));
-        amountSlider.setForeground(new java.awt.Color(10, 187, 146));
+        amountSlider.setBackground(tertiaryBackground);
+        amountSlider.setForeground(greenForeground);
         amountSlider.setMajorTickSpacing(1000);
         amountSlider.setMaximum(1000000);
         amountSlider.setMinimum(250);
@@ -170,18 +170,19 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        jLabel12.setFont(new java.awt.Font("Noto Sans Medium", 0, 14)); // NOI18N
-        jLabel12.setForeground(new java.awt.Color(248, 248, 248));
+        jLabel12.setBackground(secondaryBackground);
+        jLabel12.setFont(medium14);
+        jLabel12.setForeground(primaryForeground);
         jLabel12.setText("Monthly investment");
         jLabel12.setToolTipText("");
 
-        amount.setBackground(new java.awt.Color(16, 54, 45));
+        amount.setBackground(greenBackground);
         amount.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 5, 0, 5));
-        amount.setForeground(new java.awt.Color(10, 187, 146));
+        amount.setForeground(greenForeground);
         amount.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#,##0"))));
         amount.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         amount.setText("25,000");
-        amount.setFont(new java.awt.Font("Noto Sans", 0, 18)); // NOI18N
+        amount.setFont(normal18);
         amount.setVerifyInputWhenFocusTarget(false);
         amount.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -218,21 +219,22 @@ public class Main extends javax.swing.JFrame {
                 .addContainerGap(15, Short.MAX_VALUE))
         );
 
-        durationContainer.setBackground(new java.awt.Color(28, 28, 28));
-        durationContainer.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(25, 25, 25), 3, true));
+        durationContainer.setBackground(secondaryBackground);
+        durationContainer.setBorder(new javax.swing.border.LineBorder(primaryBorder, 3, true));
 
-        jLabel3.setFont(new java.awt.Font("Noto Sans Medium", 0, 14)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(248, 248, 248));
+        jLabel3.setBackground(secondaryBackground);
+        jLabel3.setFont(medium14);
+        jLabel3.setForeground(primaryForeground);
         jLabel3.setText("Time period");
         jLabel3.setToolTipText("");
 
-        jLabel4.setFont(new java.awt.Font("Noto Sans SemiBold", 0, 18)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(248, 248, 248));
+        jLabel4.setFont(semiBold18);
+        jLabel4.setForeground(primaryForeground);
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel4.setText("Yr");
 
-        durationSlider.setBackground(new java.awt.Color(46, 46, 46));
-        durationSlider.setForeground(new java.awt.Color(10, 187, 146));
+        durationSlider.setBackground(tertiaryBackground);
+        durationSlider.setForeground(greenForeground);
         durationSlider.setMajorTickSpacing(5);
         durationSlider.setMaximum(40);
         durationSlider.setMinimum(1);
@@ -248,13 +250,13 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        duration.setBackground(new java.awt.Color(16, 54, 45));
+        duration.setBackground(greenBackground);
         duration.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 5, 0, 5));
-        duration.setForeground(new java.awt.Color(10, 187, 146));
+        duration.setForeground(greenForeground);
         duration.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
         duration.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         duration.setText("10");
-        duration.setFont(new java.awt.Font("Noto Sans", 0, 18)); // NOI18N
+        duration.setFont(normal18);
         duration.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 durationKeyReleased(evt);
@@ -311,26 +313,27 @@ public class Main extends javax.swing.JFrame {
                 .addContainerGap(20, Short.MAX_VALUE))
         );
 
-        resultsContainer.setBackground(new java.awt.Color(18, 18, 18));
-        resultsContainer.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(37, 37, 37), 2, true));
+        resultsContainer.setBackground(mainBackground);
+        resultsContainer.setBorder(new javax.swing.border.LineBorder(secondaryBorder, 2, true));
 
-        investedContainer.setBackground(new java.awt.Color(28, 28, 28));
-        investedContainer.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(25, 25, 25), 3, true));
+        investedContainer.setBackground(secondaryBackground);
+        investedContainer.setBorder(new javax.swing.border.LineBorder(primaryBorder, 3, true));
 
-        jLabel13.setFont(new java.awt.Font("Noto Sans Medium", 0, 14)); // NOI18N
-        jLabel13.setForeground(new java.awt.Color(184, 184, 184));
+        jLabel13.setBackground(secondaryBackground);
+        jLabel13.setFont(medium14);
+        jLabel13.setForeground(secondaryForeground);
         jLabel13.setText("Invested amount");
         jLabel13.setToolTipText("");
 
         invested.setEditable(false);
-        invested.setBackground(new java.awt.Color(28, 28, 28));
+        invested.setBackground(secondaryBackground);
         invested.setBorder(null);
-        invested.setForeground(new java.awt.Color(248, 248, 248));
+        invested.setForeground(primaryForeground);
         invested.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("¤#,##0"))));
         invested.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
         invested.setText("₹0");
         invested.setFocusable(false);
-        invested.setFont(new java.awt.Font("Noto Sans SemiBold", 0, 18)); // NOI18N
+        invested.setFont(semiBold18);
         invested.setRequestFocusEnabled(false);
 
         javax.swing.GroupLayout investedContainerLayout = new javax.swing.GroupLayout(investedContainer);
@@ -356,23 +359,24 @@ public class Main extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        investedContainer3.setBackground(new java.awt.Color(28, 28, 28));
-        investedContainer3.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(25, 25, 25), 3, true));
+        investedContainer3.setBackground(secondaryBackground);
+        investedContainer3.setBorder(new javax.swing.border.LineBorder(primaryBorder, 3, true));
 
-        jLabel14.setFont(new java.awt.Font("Noto Sans Medium", 0, 14)); // NOI18N
-        jLabel14.setForeground(new java.awt.Color(184, 184, 184));
+        jLabel14.setBackground(secondaryBackground);
+        jLabel14.setFont(medium14);
+        jLabel14.setForeground(secondaryForeground);
         jLabel14.setText("Est. returns");
         jLabel14.setToolTipText("");
 
         returns.setEditable(false);
-        returns.setBackground(new java.awt.Color(28, 28, 28));
+        returns.setBackground(secondaryBackground);
         returns.setBorder(null);
-        returns.setForeground(new java.awt.Color(248, 248, 248));
+        returns.setForeground(primaryForeground);
         returns.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("¤#,##0"))));
         returns.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
         returns.setText("₹0");
         returns.setFocusable(false);
-        returns.setFont(new java.awt.Font("Noto Sans SemiBold", 0, 18)); // NOI18N
+        returns.setFont(semiBold18);
         returns.setRequestFocusEnabled(false);
 
         javax.swing.GroupLayout investedContainer3Layout = new javax.swing.GroupLayout(investedContainer3);
@@ -396,23 +400,24 @@ public class Main extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        investedContainer4.setBackground(new java.awt.Color(28, 28, 28));
-        investedContainer4.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(25, 25, 25), 3, true));
+        investedContainer4.setBackground(secondaryBackground);
+        investedContainer4.setBorder(new javax.swing.border.LineBorder(primaryBorder, 3, true));
 
-        jLabel15.setFont(new java.awt.Font("Noto Sans Medium", 0, 14)); // NOI18N
-        jLabel15.setForeground(new java.awt.Color(184, 184, 184));
+        jLabel15.setBackground(secondaryBackground);
+        jLabel15.setFont(medium14);
+        jLabel15.setForeground(secondaryForeground);
         jLabel15.setText("Total value");
         jLabel15.setToolTipText("");
 
         totalValue.setEditable(false);
-        totalValue.setBackground(new java.awt.Color(28, 28, 28));
+        totalValue.setBackground(secondaryBackground);
         totalValue.setBorder(null);
-        totalValue.setForeground(new java.awt.Color(248, 248, 248));
+        totalValue.setForeground(primaryForeground);
         totalValue.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("¤#,##0"))));
         totalValue.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
         totalValue.setText("₹0");
         totalValue.setFocusable(false);
-        totalValue.setFont(new java.awt.Font("Noto Sans SemiBold", 0, 18)); // NOI18N
+        totalValue.setFont(semiBold18);
         totalValue.setRequestFocusEnabled(false);
 
         javax.swing.GroupLayout investedContainer4Layout = new javax.swing.GroupLayout(investedContainer4);
@@ -460,24 +465,28 @@ public class Main extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        resultsContainer1.setBackground(new java.awt.Color(18, 18, 18));
-        resultsContainer1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(37, 37, 37), 2, true));
+        resultsContainer1.setBackground(mainBackground);
+        resultsContainer1.setBorder(new javax.swing.border.LineBorder(secondaryBorder, 2, true));
 
-        jLabel16.setFont(new java.awt.Font("Noto Sans", 0, 14)); // NOI18N
-        jLabel16.setForeground(new java.awt.Color(248, 248, 248));
+        jLabel16.setBackground(mainBackground);
+        jLabel16.setFont(normal14);
+        jLabel16.setForeground(primaryForeground);
         jLabel16.setText("Invested amount");
         jLabel16.setToolTipText("");
 
-        jLabel7.setBackground(new java.awt.Color(152, 164, 255));
+        jLabel7.setBackground(graphPrimary);
         jLabel7.setOpaque(true);
 
-        jLabel18.setFont(new java.awt.Font("Noto Sans", 0, 14)); // NOI18N
-        jLabel18.setForeground(new java.awt.Color(248, 248, 248));
+        jLabel18.setBackground(mainBackground);
+        jLabel18.setFont(normal14);
+        jLabel18.setForeground(primaryForeground);
         jLabel18.setText("Est. returns");
         jLabel18.setToolTipText("");
 
-        jLabel1.setBackground(new java.awt.Color(24, 26, 42));
+        jLabel1.setBackground(graphSecondary);
         jLabel1.setOpaque(true);
+
+        graph.setBackground(mainBackground);
 
         javax.swing.GroupLayout resultsContainer1Layout = new javax.swing.GroupLayout(resultsContainer1);
         resultsContainer1.setLayout(resultsContainer1Layout);
@@ -510,33 +519,35 @@ public class Main extends javax.swing.JFrame {
                 .addComponent(graph, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        schemeContainer.setBackground(new java.awt.Color(18, 18, 18));
-        schemeContainer.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(37, 37, 37), 2, true));
+        schemeContainer.setBackground(mainBackground);
+        schemeContainer.setBorder(new javax.swing.border.LineBorder(secondaryBorder, 2, true));
 
-        jLabel5.setFont(new java.awt.Font("Noto Sans Medium", 0, 14)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(248, 248, 248));
+        jLabel5.setBackground(mainBackground);
+        jLabel5.setFont(medium14);
+        jLabel5.setForeground(primaryForeground);
         jLabel5.setText("Mutual fund");
         jLabel5.setToolTipText("");
 
-        amountContainer1.setBackground(new java.awt.Color(28, 28, 28));
-        amountContainer1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(25, 25, 25), 3, true));
+        amountContainer1.setBackground(secondaryBackground);
+        amountContainer1.setBorder(new javax.swing.border.LineBorder(primaryBorder, 3, true));
         amountContainer1.setPreferredSize(new java.awt.Dimension(374, 59));
 
-        jLabel17.setFont(new java.awt.Font("Noto Sans Medium", 0, 14)); // NOI18N
-        jLabel17.setForeground(new java.awt.Color(184, 184, 184));
+        jLabel17.setBackground(secondaryBackground);
+        jLabel17.setFont(medium14);
+        jLabel17.setForeground(secondaryForeground);
         jLabel17.setText("Returns (Annualised)");
         jLabel17.setToolTipText("");
 
         returnsDisplay.setEditable(false);
-        returnsDisplay.setBackground(new java.awt.Color(28, 28, 28));
+        returnsDisplay.setBackground(secondaryBackground);
         returnsDisplay.setBorder(null);
-        returnsDisplay.setForeground(new java.awt.Color(10, 187, 146));
+        returnsDisplay.setForeground(greenForeground);
         returnsDisplay.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00%"))));
         returnsDisplay.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         returnsDisplay.setText("0.00%");
         returnsDisplay.setToolTipText("");
         returnsDisplay.setFocusable(false);
-        returnsDisplay.setFont(new java.awt.Font("Noto Sans SemiBold", 0, 18)); // NOI18N
+        returnsDisplay.setFont(semiBold18);
 
         javax.swing.GroupLayout amountContainer1Layout = new javax.swing.GroupLayout(amountContainer1);
         amountContainer1.setLayout(amountContainer1Layout);
@@ -556,20 +567,17 @@ public class Main extends javax.swing.JFrame {
                 .addGroup(amountContainer1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(returnsDisplay, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
-        schemeName.setBackground(new java.awt.Color(46, 46, 46));
-        schemeName.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 20, 0, 20));
-        schemeName.setForeground(new java.awt.Color(184, 184, 184));
+        schemeName.setBackground(tertiaryBackground);
+        schemeName.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 15, 0, 15));
+        schemeName.setForeground(secondaryForeground);
         schemeName.setText("Mutual Fund Name");
-        schemeName.setFont(new java.awt.Font("Noto Sans", 0, 18)); // NOI18N
+        schemeName.setFont(normal18);
         schemeName.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 schemeNameKeyReleased(evt);
-            }
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                schemeNameKeyTyped(evt);
             }
         });
 
@@ -616,7 +624,7 @@ public class Main extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(40, Short.MAX_VALUE)
+                .addContainerGap(52, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(resultsContainer1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
@@ -655,39 +663,9 @@ public class Main extends javax.swing.JFrame {
         compute();
     }//GEN-LAST:event_schemeNameKeyReleased
 
-    private void schemeNameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_schemeNameKeyTyped
-        // TODO add your handling code here:
-    }//GEN-LAST:event_schemeNameKeyTyped
-
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
         FlatDarkLaf.setup();
 
-        /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Main().setVisible(true);
