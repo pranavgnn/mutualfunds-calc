@@ -120,22 +120,23 @@ class AutofillFieldUI extends MetalTextFieldUI {
                     return;
                 }
                 
-                String displayResult = autofillResults.getFirst();
-                
-                textField.setText(displayResult);
-                textField.setCaretPosition(typed.length());
-                textField.select(typed.length(), displayResult.length());
-                setItemValue(listHash.get(displayResult));
-            }    
+                autofill(autofillResults.getFirst(), typed.length());
+            }   
         });
+    }
+    
+    private void autofill(String displayResult, int typedLength) {
+        textField.setText(displayResult);
+        textField.setCaretPosition(typedLength);
+        textField.select(typedLength, displayResult.length());
+        setItemValue(listHash.get(displayResult));
     }
     
     private void shiftAutofill(int direction) {
         if (autofillResults == null) return;
         
         currentAutofillIndex = (currentAutofillIndex + direction) % autofillResults.size();
-        textField.setText(autofillResults.get(currentAutofillIndex));
-        setItemValue(listHash.get(textField.getText()));
+        autofill(autofillResults.get(currentAutofillIndex), textField.getSelectionStart());
     }
     
     private void clearItemValue() {

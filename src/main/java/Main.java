@@ -1,11 +1,10 @@
-
-
 import api.Calculator;
 import api.API;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.formdev.flatlaf.FlatDarkLaf;
 import components.piechart.PieData;
 import java.util.HashMap;
+import javax.swing.ImageIcon;
 
 public class Main extends javax.swing.JFrame {
 
@@ -138,6 +137,7 @@ public class Main extends javax.swing.JFrame {
         setTitle("Mutual Funds Calculator");
         setBackground(new java.awt.Color(18, 18, 18));
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setIconImage((new ImageIcon("../../../Icon.ico").getImage()));
         setLocation(new java.awt.Point(0, 0));
         setLocationByPlatform(true);
         setResizable(false);
