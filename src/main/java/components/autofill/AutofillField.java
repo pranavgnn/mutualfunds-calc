@@ -120,7 +120,7 @@ class AutofillFieldUI extends MetalTextFieldUI {
                     return;
                 }
                 
-                autofill(autofillResults.getFirst(), typed.length());
+                autofill(autofillResults.get(0), typed.length());
             }   
         });
     }

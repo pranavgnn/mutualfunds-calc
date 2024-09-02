@@ -14,12 +14,8 @@
   <restartOnCrash>false</restartOnCrash>
   <manifest></manifest>
   <icon>C:\Users\hp\Documents\NetBeansProjects\mutualfunds-calc\Icon.ico</icon>
-  <classPath>
-    <mainClass>Main</mainClass>
-    <cp>Main</cp>
-  </classPath>
   <jre>
-    <path>C:\Program Files\Java\jdk-21\bin</path>
+    <path>%JAVA_HOME%;%PATH%</path>
     <requiresJdk>false</requiresJdk>
     <requires64Bit>false</requires64Bit>
     <minVersion></minVersion>
